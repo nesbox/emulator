@@ -435,17 +435,17 @@ package mode
 				{
 					win:function():void
 					{
-						downloadCompanion('../download/companion.exe');
+						downloadCompanion('download/companion.exe');
 					},
 					
 					mac:function():void
 					{
-						downloadCompanion('../download/companion.dmg');
+						downloadCompanion('download/companion.dmg');
 					},
 
 					air:function():void
 					{
-						downloadCompanion('../download/companion.air');
+						downloadCompanion('download/companion.air');
 					},
 
 					close:function():void

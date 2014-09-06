@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Loader;
 	import flash.events.Event;
+	import flash.events.ProgressEvent;
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 
@@ -112,7 +113,7 @@ package
 		{
 			var self:GameData = this;
 			
-			var request:URLRequest = new URLRequest([self.baseUrl, self.module + '?v2'].join('/'));
+			var request:URLRequest = new URLRequest([self.baseUrl, self.module].join('/'));
 			var moduleLoader:Loader = new Loader;
 			
 			moduleLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, function():void
@@ -124,6 +125,13 @@ package
 				
 				if(self.action == Own)
 					handler.onLoadRom();
+			});
+			
+			moduleLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, function(event:ProgressEvent):void
+			{
+				handler.onInfoShow('<p>' + 
+					Locale.instance.loading_emulator + 
+					' ' + int(event.bytesLoaded * 100 / event.bytesTotal) + '%<p>');
 			});
 			
 			moduleLoader.load(request);	
