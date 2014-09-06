@@ -435,14 +435,19 @@ package mode
 				{
 					win:function():void
 					{
-						downloadCompanion('/download/companion.exe');
+						downloadCompanion('../download/companion.exe');
 					},
 					
 					mac:function():void
 					{
-						downloadCompanion('/download/companion.dmg');
+						downloadCompanion('../download/companion.dmg');
 					},
-					
+
+					air:function():void
+					{
+						downloadCompanion('../download/companion.air');
+					},
+
 					close:function():void
 					{
 						gamepadMessage.hide();
@@ -450,9 +455,9 @@ package mode
 				};
 			
 			gamepadMessage.show('<p>'+locale.gamepad_app_info+'<br><br><br><br>' +
-				'<a href="event:win">Windows</a> ' +
-				locale.or + 
-				' <a href="event:mac">MacOS</a><br><br><br>' +
+				'<a href="event:win">Windows</a>, ' +
+				'<a href="event:mac">MacOS</a>, ' +
+				'<a href="event:air">AIR</a><br><br><br>' +
 				'<a href="event:close">'+locale.close.toLocaleUpperCase()+'</a></p>', callbacks);
 		}
 

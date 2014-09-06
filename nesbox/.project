@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <projectDescription>
-	<name>logic</name>
-	<comment></comment>
+	<name>nesbox</name>
+	<comment/>
 	<projects>
 		<project>common</project>
 	</projects>
@@ -16,3 +16,4 @@
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
 </projectDescription>
+
