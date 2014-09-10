@@ -158,7 +158,7 @@
 	"user_profile" : "User profile",
 	"history" : "History",
 	"own_roms" : "Own ROMs",
-	"gamepad_app_info" : "To use gamepad with the emulator, please download and install Nesbox Companion application for your operating system.",
+	"gamepad_app_info" : "To use gamepad with the emulator, please download and install Adobe Air and Nesbox Companion application ",
 	"gamepad_app_downloaded" : "Nesbox Companion downloaded",
 	"click_here_to_save_it" : "Click here to save it",
 	"server_setup" : "server setup",

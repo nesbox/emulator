@@ -1,6 +1,7 @@
 package mode
 {
 	import core.ICoreHandler;
+	import flash.net.navigateToURL;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -381,71 +382,18 @@ package mode
 		public function onActionsUpload():void {}
 		public function onActionsFavorite():void {}
 		
-		private function downloadCompanion(url:String):void
-		{
-			var urlLoader:URLLoader = new URLLoader();
-			
-			var callbacks:Object = 
-				{
-					save:function():void
-					{
-						gamepadMessage.hide();
-						
-						var file:FileReference = new FileReference();
-						
-						file.save(urlLoader.data, url.split('/').pop());
-					},
-					
-					close:function():void
-					{
-						urlLoader.close();
-						gamepadMessage.hide();
-					}
-				};
-			
-			urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
-			
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, function():void
-			{
-				gamepadMessage.show('<p>'+locale.error_occured
-					+ '<br><br><a href="event:close">' 
-					+ locale.close.toLocaleUpperCase()
-					+ '</a></p>', callbacks);
-			});
-			
-			urlLoader.addEventListener(Event.COMPLETE, function():void
-			{
-				gamepadMessage.show('<p>'+locale.gamepad_app_downloaded+'!<br><br>' 
-					+ '<a href="event:save">'+locale.click_here_to_save_it+'...<br><br><br>'
-					+ '<a href="event:close">' 
-					+ locale.close.toLocaleUpperCase()
-					+ '</a></p>', callbacks);
-			});
-			
-			urlLoader.load(new URLRequest(url));
-			
-			gamepadMessage.show('<p>'+locale.loading_module+', '+
-				locale.please_wait+'...<br><br><br>' +
-				'<a href="event:close">'+locale.close.toLocaleUpperCase()+'</a></p>', callbacks);
-		}
-				
 		public function onActionsGamepad():void 
 		{
 			var callbacks:Object = 
 				{
-					win:function():void
-					{
-						downloadCompanion('download/companion.exe');
-					},
-					
-					mac:function():void
-					{
-						downloadCompanion('download/companion.dmg');
-					},
-
 					air:function():void
 					{
-						downloadCompanion('download/companion.air');
+						navigateToURL(new URLRequest('//get.adobe.com/air/'), '_blank');
+					},
+
+					companion:function():void
+					{
+						navigateToURL(new URLRequest('//github.com/nesbox/nesbox-companion/raw/master/air/companion.air'), '_blank');
 					},
 
 					close:function():void
@@ -454,10 +402,9 @@ package mode
 					}
 				};
 			
-			gamepadMessage.show('<p>'+locale.gamepad_app_info+'<br><br><br><br>' +
-				'<a href="event:win">Windows</a>, ' +
-				'<a href="event:mac">MacOS</a>, ' +
-				'<a href="event:air">AIR</a><br><br><br>' +
+			gamepadMessage.show('<p>'+locale.gamepad_app_info+'<br><br><br><br><br>' +
+				'<a href="event:air">Download Adobe AIR</a><br><br>' +
+				'<a href="event:companion">Download Nesbox Companion</a><br><br><br>' +
 				'<a href="event:close">'+locale.close.toLocaleUpperCase()+'</a></p>', callbacks);
 		}
 
