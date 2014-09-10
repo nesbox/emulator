@@ -3,13 +3,10 @@ package ui
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
 	import flash.text.StyleSheet;
-	
 	import model.Gamepad;
 	
-	import spark.supportClasses.INavigator;
 	
 	public class SetupTutorial extends Sprite implements IBaseSetup
 	{
