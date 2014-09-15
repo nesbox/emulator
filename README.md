@@ -63,6 +63,8 @@ Add the following html to page where you want to place the emulator.
 
 ```
 
+Supported systems: nes, snes, sega, gb, gba
+
 ##### Example
 
 Click to play 'Flappy Bird (PD) v1.0'
