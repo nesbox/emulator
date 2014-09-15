@@ -61,7 +61,6 @@ Add the following html to page where you want to place the emulator.
 	
 </script>
 
-</html>
 ```
 
 ##### Example

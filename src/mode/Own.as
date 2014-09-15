@@ -220,21 +220,7 @@ package mode
 			initSaveLoadShortcuts();
 			nes.initSingleEmulation(gameData.ntsc, gameData.data, gameData.region);
 			
-			if(Focus.activated)
-				nes.play();
-			
-			if(gameData.value && gameData.value.length)
-			{
-				if(!Focus.activated)
-				{
-					pause();
-				}
-				
-				state = EmulatorState.Loading;
-				message.show('<p>' + locale.loading_game + '</p>');
-				
-				api.loadState(gameData.rom, gameData.value);
-			}
+			Focus.activated ? resume() : pause();
 		}
 		
 		public override function onActionsMute():void
