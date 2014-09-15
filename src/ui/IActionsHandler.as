@@ -16,5 +16,6 @@ package ui
 		function onActionsShareGoogle():void;
 		function onActionsShareTwitter():void;
 		function onActionsShareVkontakte():void;
+		function onActionsShareGithub():void;
 	}
 }

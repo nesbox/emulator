@@ -4,9 +4,14 @@ package
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.events.ContextMenuEvent;
 	import flash.events.Event;
 	import flash.net.FileFilter;
 	import flash.net.FileReference;
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
+	import flash.ui.ContextMenu;
+	import flash.ui.ContextMenuItem;
 	
 	import mode.Contest;
 	import mode.Network;
@@ -52,6 +57,23 @@ package
 		{
 			info.show(value);
 		}
+
+		private function createContextMenu():void
+		{
+			var customMenu:ContextMenu = new ContextMenu();
+			customMenu.hideBuiltInItems();
+			
+			var emulatorItem:ContextMenuItem = new ContextMenuItem(locale.hint_share);
+			emulatorItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, function():void
+			{
+				Tools.gotoNesboxPage();
+			});
+			
+			customMenu.customItems.push(emulatorItem);
+			
+			contextMenu = customMenu;
+
+		}
 		
 		private function init():void
 		{
@@ -61,7 +83,6 @@ package
 			
 			Focus.init(stage);
 			
-			stage.showDefaultContextMenu = false;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
 				
@@ -77,6 +98,8 @@ package
 		
 		public function onLoadLocale():void
 		{
+			createContextMenu();
+			
 			if (gameData.action == GameData.Own 
 				&& gameData.url == null)
 			{

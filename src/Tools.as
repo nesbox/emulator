@@ -3,6 +3,7 @@ package
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.external.ExternalInterface;
+	import flash.net.navigateToURL;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
@@ -57,6 +58,11 @@ package
 			});
 			
 			loader.load(new URLRequest(bitly));
+		}
+		
+		public static function gotoNesboxPage():void
+		{
+			navigateToURL(new URLRequest('http://nesbox.github.io/emulator/'), '_blank');
 		}
 	}
 }

@@ -134,7 +134,7 @@
 	"hint_load" : "load state [F8]",
 	"hint_save" : "save state [F5]",
 	"hint_fullscreen" : "enable fullscreen [F11]",
-	"hint_share" : "share this game",
+	"hint_share" : "About Nesbox Emulator",
 	"hint_upload" : "save walkthrough [F2]",
 	"hint_gamepad" : "setup gamepad",
 	"hint_favorite" : "add to favorites",

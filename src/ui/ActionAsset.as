@@ -38,5 +38,8 @@ package ui
 		[Embed(source='/assets/vkontakte.png')]
 		public static const VkontakteButton:Class;
 
+		[Embed(source='/assets/github.png')]
+		public static const GithubButton:Class;
+
 	}
 }

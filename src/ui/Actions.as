@@ -73,10 +73,7 @@ package ui
 
 		private const socialButtonsMap:Array = 
 			[
-				{name:'facebook', 	icon:ActionAsset.FacebookButton, click:facebook},
-				{name:'google', 	icon:ActionAsset.GoogleButton, click:google},
-				{name:'twitter',	icon:ActionAsset.TwitterButton, click:twitter},
-				{name:'vkontakte',	icon:ActionAsset.VkontakteButton, click:vkontakte},
+				{name:'github', 	icon:ActionAsset.GithubButton, click:github},
 			];
 		
 		private var buttons:Array = [];
@@ -118,10 +115,10 @@ package ui
 				return;
 			case ActionsMode.Custom:
 				fillButtons(ownModeButtonsMap);
-				return;
+				break;
 			}
 			
-//			fillSocialButtons();
+			fillSocialButtons();
 		}
 		
 		public function set info(value:String):void
@@ -137,18 +134,18 @@ package ui
 			infoText.y = - 1;
 		}
 		
-//		private function fillSocialButtons():void
-//		{
-//			var offset:int = Variables.Width - socialButtonsMap.length*Height;
-//			for each(var item:Object in socialButtonsMap)
-//			{
-//				var button:Button = new Button(item.name, item.icon, item.click, 'share', true);
-//				addChild(button).x = offset;
-//				offset += Height;
-//				
-//				buttons.push(button);
-//			}
-//		}
+		private function fillSocialButtons():void
+		{
+			var offset:int = Variables.Width - socialButtonsMap.length*Height;
+			for each(var item:Object in socialButtonsMap)
+			{
+				var button:Button = new Button(item.name, item.icon, item.click, 'share');
+				addChild(button).x = offset;
+				offset += Height;
+				
+				buttons.push(button);
+			}
+		}
 
 		private function fillButtons(map:Array):void
 		{
@@ -288,6 +285,11 @@ package ui
 		{
 			Analytics.trackShareVkontakteEvent();
 			handler.onActionsShareVkontakte();
+		}
+		
+		private function github():void
+		{
+			handler.onActionsShareGithub();
 		}
 		
 		private function gamepad():void

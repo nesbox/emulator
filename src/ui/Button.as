@@ -103,9 +103,9 @@ package ui
 				hint.x = HINT_GAP;
 			}
 			
-			if(hint.x + hint.width > stage.stageWidth)
+			if(hint.x + hint.width > stage.stageWidth/2)
 			{
-				hint.x = stage.stageWidth - hint.width - HINT_GAP;
+				hint.x = stage.stageWidth/2 - hint.width - HINT_GAP;
 			}
 			
 		}

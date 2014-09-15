@@ -280,6 +280,11 @@ package mode
 		{
 			JSProxy.windowOpen('http://vk.com/share.php?url=' + Tools.currentUrl, 'Send to VKontakte');
 		}
+		
+		public function onActionsShareGithub():void
+		{
+			Tools.gotoNesboxPage();
+		}
 
 		protected function pauseEmulation():void {}
 		protected function resumeEmulation():void {}
