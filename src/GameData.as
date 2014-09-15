@@ -3,6 +3,8 @@ package
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 
@@ -21,6 +23,7 @@ package
 		public var module:String;
 		public var system:String;
 		public var baseUrl:String;
+		public var url:String;
 		
 		private var handler:IGameDataHandler;
 		
@@ -47,6 +50,7 @@ package
 			this.system = parameters['system'];
 			this.game = parameters['game'];
 			this.rom = parameters['rom'];
+			this.url = parameters['url'];
 			this.locale = parameters['locale'] || 'en';
 			this.action = parameters['action'] || Own;
 			
@@ -123,8 +127,14 @@ package
 				Variables.Width = self.core.getWidth();
 				Variables.Height = self.core.getHeight();
 				
-				if(self.action == Own)
-					handler.onLoadRom();
+				if (self.action == Own)
+				{
+					if (self.url == null)
+						handler.onLoadRom();
+					else
+						loadRom();
+				}
+			
 			});
 			
 			moduleLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, function(event:ProgressEvent):void
@@ -135,6 +145,29 @@ package
 			});
 			
 			moduleLoader.load(request);	
+		}
+		
+		private function loadRom():void
+		{
+			rom = rom || url.split('/').pop();
+			
+			var romLoader:URLLoader = new URLLoader();
+			romLoader.dataFormat = URLLoaderDataFormat.BINARY;
+			
+			romLoader.addEventListener(Event.COMPLETE, function():void 
+			{
+				data = romLoader.data;
+				handler.onLoadRom();
+			});
+			
+			romLoader.addEventListener(ProgressEvent.PROGRESS, function(event:ProgressEvent):void
+			{
+				handler.onInfoShow('<p>' + 
+					Locale.instance.loading_game + 
+					' ' + int(event.bytesLoaded * 100 / event.bytesTotal) + '%<p>');
+			});
+			
+			romLoader.load(new URLRequest(url));
 		}
 	}
 }

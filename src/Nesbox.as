@@ -77,7 +77,8 @@ package
 		
 		public function onLoadLocale():void
 		{
-			if(gameData.action == GameData.Own)
+			if (gameData.action == GameData.Own 
+				&& gameData.url == null)
 			{
 				initOwnRomMode();
 			}
