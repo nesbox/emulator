@@ -57,13 +57,10 @@ package
 			this.module = this.system + '.swf';
 		}
 		
-		public function loadLocale():void
+		private function parseLocale(json:String):void
 		{
-			[Embed(source='/assets/en.json', mimeType="application/octet-stream")]
-			const LocaleJson:Class;
-			
 			var locale:Locale = Locale.instance;
-			var data:Object = JSON.parse(new LocaleJson);
+			var data:Object = JSON.parse(json);
 			
 			for(var key:String in data)
 			{
@@ -72,8 +69,33 @@ package
 					locale[key] = data[key];
 				}
 			}
-			
-			handler.onLoadLocale();
+		}
+		
+		public function loadLocale():void
+		{
+			if (this.locale == 'en')
+			{
+				[Embed(source='/assets/en.json', mimeType="application/octet-stream")]
+				const LocaleJson:Class;
+				
+				parseLocale(new LocaleJson());
+				
+				handler.onLoadLocale();				
+			}
+			else
+			{
+				var localeLoader:URLLoader = new URLLoader();
+				localeLoader.dataFormat = URLLoaderDataFormat.TEXT;
+				
+				localeLoader.addEventListener(Event.COMPLETE, function():void
+				{
+					parseLocale(localeLoader.data);
+					
+					handler.onLoadLocale();
+				});
+				
+				localeLoader.load(new URLRequest(this.locale + '.json'));
+			}
 		}
 		
 		public function parseOwnRomName(name:String):void
