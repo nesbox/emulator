@@ -1,5 +1,7 @@
 package
 {
+	import deng.fzip.FZip;
+	import deng.fzip.FZipFile;
 	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
@@ -33,6 +35,8 @@ package
 		public static const Save:String 	= 'save';
 		public static const Own:String 		= 'own';
 		public static const Room:String 	= 'room';
+		
+		private static const ZipExt:String = '.zip';
 		
 		public function GameData(handler:IGameDataHandler, loaderUrl:String)
 		{
@@ -100,6 +104,24 @@ package
 		
 		public function parseOwnRomName(name:String):void
 		{
+			if (name.indexOf(ZipExt) != -1)
+			{
+				var zip:FZip = new FZip();
+				
+				zip.addEventListener(Event.COMPLETE, function():void
+				{
+					var romFile:FZipFile = zip.getFileAt(0);
+					
+					data = romFile.content;
+					
+					parseOwnRomName(romFile.filename);
+				});
+				
+				zip.loadBytes(data);
+				
+				return;
+			}
+			
 			const Modules:Object = 
 				{
 					'nes':'nes.swf',
@@ -178,7 +200,24 @@ package
 			
 			romLoader.addEventListener(Event.COMPLETE, function():void 
 			{
-				data = romLoader.data;
+				if (rom.indexOf(ZipExt) != -1)
+				{
+					var zip:FZip = new FZip();
+					
+					zip.addEventListener(Event.COMPLETE, function():void
+					{
+						var romFile:FZipFile = zip.getFileAt(0);
+						
+						data = romFile.content;
+					});
+					
+					zip.loadBytes(romLoader.data);
+				}
+				else
+				{
+					data = romLoader.data;	
+				}
+				
 				handler.onLoadRom();
 			});
 			

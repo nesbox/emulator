@@ -188,7 +188,7 @@ package
 					{
 						Analytics.trackOwnRomEvent();
 						
-						var romsFilter:FileFilter = new FileFilter("Supported roms", "*.nes;*.smc;*.gen;*.gb;*.gbc;*.gba");
+						var romsFilter:FileFilter = new FileFilter("Supported roms", "*.nes;*.smc;*.gen;*.gb;*.gbc;*.gba;*.zip");
 						var ref:FileReference = new FileReference();
 						ref.addEventListener(Event.SELECT, function():void
 						{
